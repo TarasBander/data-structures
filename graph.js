@@ -28,6 +28,30 @@ class Graph {
         }
       });
     }
+
+    bfs(startNode) {
+      const queue = [];
+      const visited = {};
+  
+      if (!this.nodes[startNode]) {
+        return;
+      }
+  
+      queue.push(startNode);
+      visited[startNode] = true;
+  
+      while (queue.length > 0) {
+        const currentNode = queue.shift();
+        console.log(`Visit vertex ${currentNode}`);
+  
+        this.nodes[currentNode].forEach(neighbor => {
+          if (!visited[neighbor]) {
+            visited[neighbor] = true;
+            queue.push(neighbor);
+          }
+        });
+      }
+    }
   }
   
   // creating Graph
@@ -50,4 +74,7 @@ class Graph {
   
   console.log('deep search');
   graph.dfs(1);
+
+  console.log('wide search');
+  graph.bfs(1);
   
